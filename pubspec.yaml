@@ -1,7 +1,7 @@
 name: myfatoorah_api
 description: Myfatoorah payment getaway API
 version: 0.0.1
-homepage:
+homepage: https://github.com/WafikSleim/myfatoorah_api
 
 environment:
   sdk: '>=3.0.3 <4.0.0'
