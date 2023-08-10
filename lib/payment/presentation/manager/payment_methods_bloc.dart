@@ -1,15 +1,36 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 // ignore: depend_on_referenced_packages
 import 'package:meta/meta.dart';
+import 'package:myfatoorah_api/core/exception/network_exception.dart';
+import 'package:myfatoorah_api/core/services/service_locator.dart';
+import 'package:myfatoorah_api/payment/data/repositories/payment_repository.dart';
+import 'package:myfatoorah_api/payment/domain/entities/currency_iso.dart';
+import 'package:myfatoorah_api/payment/domain/entities/initiate_payment_request.dart';
 import 'package:myfatoorah_api/payment/domain/entities/initiate_payment_response.dart';
+import 'package:myfatoorah_api/payment/domain/use_cases/initiate_payment_use_case.dart';
 
 part 'payment_methods_event.dart';
 part 'payment_methods_state.dart';
 
 class PaymentMethodsBloc extends Bloc<PaymentMethodsEvent, PaymentMethodsState> {
   PaymentMethodsBloc() : super(const PaymentMethodsState()) {
-
+    on<InitPaymentEvent>(_initPayment);
+    on<ExecutePaymentEvent>(_executePayment);
   }
 
   static PaymentMethodsBloc get(context) =>BlocProvider.of(context);
+
+  void _initPayment(InitPaymentEvent event, Emitter<PaymentMethodsState> emit) async {
+    try {
+      await InitiatePaymentUseCase(instance<PaymentRepository>()).call(InitiatePaymentRequest(invoiceAmount: event.amount, currencyIso: CurrencyIso(title: "", countryIsoCode: "", currencyIsoCode: event.currencyCode, mobileCountry: ""))).then((value) {
+
+      });
+    } on PaymentException catch (e) {
+
+    }
+  }
+
+  void _executePayment(ExecutePaymentEvent event, Emitter<PaymentMethodsState> emit) async {
+
+  }
 }
