@@ -11,29 +11,33 @@ enum States {
 @immutable
 class PaymentMethodsState {
   final String? error;
-  final States state;
+  final States initState;
+  final States executeState;
   final List<PaymentMethod> paymentMethods;
 
   const PaymentMethodsState({
     this.error,
-    this.state = States.init,
+    this.initState = States.init,
+    this.executeState = States.init,
     this.paymentMethods = const [],
   });
 
   PaymentMethodsState copyWith({
     String? error,
-    States? state,
+    States? initState,
+    States? executeState ,
     List<PaymentMethod>? paymentMethods,
   }) {
     return PaymentMethodsState(
       error: error ?? this.error,
-      state: state ?? this.state,
+      initState: initState ?? this.initState,
       paymentMethods: paymentMethods ?? this.paymentMethods,
+      executeState: executeState ?? this.executeState,
     );
   }
 
   @override
   String toString() {
-    return 'PaymentMethodsState{error: $error, state: $state, paymentMethods: $paymentMethods}';
+    return 'PaymentMethodsState{error: $error, initState: $initState, executeState: $executeState, paymentMethods: $paymentMethods}';
   }
 }

@@ -22,11 +22,28 @@ class PaymentMethodsBloc extends Bloc<PaymentMethodsEvent, PaymentMethodsState> 
 
   void _initPayment(InitPaymentEvent event, Emitter<PaymentMethodsState> emit) async {
     try {
+      emit(
+        state.copyWith(
+          initState: States.loading,
+        ),
+      );
       await InitiatePaymentUseCase(instance<PaymentRepository>()).call(InitiatePaymentRequest(invoiceAmount: event.amount, currencyIso: CurrencyIso(title: "", countryIsoCode: "", currencyIsoCode: event.currencyCode, mobileCountry: ""))).then((value) {
-
+        final paymentMethods = value.paymentMethods;
+        emit(
+          state.copyWith(
+            paymentMethods: paymentMethods,
+            initState: States.loaded,
+          ),
+        );
       });
     } on PaymentException catch (e) {
-
+      emit(
+        state.copyWith(
+          error: e.message,
+          initState: States.error,
+        ),
+      );
+      rethrow;
     }
   }
 

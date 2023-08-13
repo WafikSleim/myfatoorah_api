@@ -43,7 +43,7 @@ class MyfatoorahAPIPaymentMethodsScreen extends StatelessWidget {
                   ),
               centerTitle: true,
             ),
-            body: state.state == States.loaded
+            body: state.initState == States.loaded
                 ? ListView(
                     children: state.paymentMethods
                         .map(
@@ -56,7 +56,7 @@ class MyfatoorahAPIPaymentMethodsScreen extends StatelessWidget {
                         )
                         .toList(),
                   )
-                : state.state == States.loading
+                : state.initState == States.loading
                     ? const Center(
                         child: CircularProgressIndicator(),
                       )
