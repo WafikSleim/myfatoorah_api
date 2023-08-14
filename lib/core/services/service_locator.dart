@@ -20,5 +20,5 @@ init(String apiToken) {
 
   instance.registerLazySingleton(() => PaymentRemoteDataSource(instance<Dio>()));
 
-  instance.registerLazySingleton(() => PaymentRepository(instance()));
+  instance.registerLazySingleton(() => PaymentRepository(instance<PaymentRemoteDataSource>()));
 }
