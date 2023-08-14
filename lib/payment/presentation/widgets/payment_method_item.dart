@@ -23,19 +23,18 @@ class PaymentMethodItemWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Expanded(
-                child: Image.network(
-                  paymentMethod.imageUrl ?? "",
-                  errorBuilder: (_, __, ___) {
-                    return const Icon(
-                      Icons.error,
-                      color: Colors.red,
-                    );
-                  },
-                ),
+              Image.network(
+                paymentMethod.imageUrl ?? "",
+                height: 80,
+                errorBuilder: (_, __, ___) {
+                  return const Icon(
+                    Icons.error,
+                    color: Colors.red,
+                  );
+                },
               ),
               Text(
-                paymentMethod.paymentMethodAr ?? "",
+                paymentMethod.paymentMethodAr ?? paymentMethod.paymentMethodEn ?? "",
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
             ],
@@ -43,12 +42,27 @@ class PaymentMethodItemWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                paymentMethod.totalAmount?.toString() ?? "",
+              Row(
+                children: [
+                  const Text(
+                    "Amount",
+                  ),
+                  Text(
+                    paymentMethod.totalAmount?.toString() ?? "",
+                  ),
+                ],
               ),
-              Text(
-                paymentMethod.serviceCharge?.toString() ?? "",
-                style: Theme.of(context).textTheme.bodyMedium,
+              const Spacer(),
+              Row(
+                children: [
+                  const Text(
+                    "service charge"
+                  ),
+                  Text(
+                    paymentMethod.serviceCharge?.toString() ?? "",
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ],
               ),
             ],
           ),
