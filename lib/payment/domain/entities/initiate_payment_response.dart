@@ -16,7 +16,7 @@ class PaymentMethod {
   final bool? isDirectPayment;
   final double? serviceCharge;
   final double? totalAmount;
-  final String currencyIso;
+  final String? currencyIso;
   final String? imageUrl;
   final bool? isEmbeddedSupported;
   final String? paymentCurrencyIso;
@@ -29,7 +29,7 @@ class PaymentMethod {
     this.isDirectPayment,
     this.serviceCharge,
     this.totalAmount,
-    required this.currencyIso,
+    this.currencyIso,
     this.imageUrl,
     this.isEmbeddedSupported,
     this.paymentCurrencyIso,

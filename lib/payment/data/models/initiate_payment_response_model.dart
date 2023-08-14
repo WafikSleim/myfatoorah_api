@@ -129,17 +129,17 @@ class PaymentMethodModel extends PaymentMethod {
 
   factory PaymentMethodModel.fromMap(Map<String, dynamic> map) {
     return PaymentMethodModel(
-      paymentMethodId: map['paymentMethodId'] as int,
-      paymentMethodAr: map['paymentMethodAr'] as String,
-      paymentMethodEn: map['paymentMethodEn'] as String,
-      paymentMethodCode: map['paymentMethodCode'] as String,
-      isDirectPayment: map['isDirectPayment'] as bool,
-      serviceCharge: map['serviceCharge'] as double,
-      totalAmount: map['totalAmount'] as double,
-      currencyIso: map['currencyIso'] as String,
-      imageUrl: map['imageUrl'] as String,
-      isEmbeddedSupported: map['isEmbeddedSupported'] as bool,
-      paymentCurrencyIso: map['paymentCurrencyIso'] as String,
+      paymentMethodId: map['paymentMethodId'] as int?,
+      paymentMethodAr: map['paymentMethodAr'] as String?,
+      paymentMethodEn: map['paymentMethodEn'] as String?,
+      paymentMethodCode: map['paymentMethodCode'] as String?,
+      isDirectPayment: map['isDirectPayment'] as bool?,
+      serviceCharge: map['serviceCharge'] as double?,
+      totalAmount: map['totalAmount'] as double?,
+      currencyIso: map['currencyIso'] as String?,
+      imageUrl: map['imageUrl'] as String?,
+      isEmbeddedSupported: map['isEmbeddedSupported'] as bool?,
+      paymentCurrencyIso: map['paymentCurrencyIso'] as String?,
     );
   }
 

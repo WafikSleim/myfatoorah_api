@@ -11,6 +11,10 @@ init(String apiToken) {
     () => Dio(
       BaseOptions(
         baseUrl: Constants.baseUrl,
+        followRedirects: false,
+        validateStatus: (status) {
+          return (status ?? 0) < 500;
+        },
         headers: {
           "Authorization": "Bearer $apiToken",
         },
@@ -18,7 +22,9 @@ init(String apiToken) {
     ),
   );
 
-  instance.registerLazySingleton(() => PaymentRemoteDataSource(instance<Dio>()));
+  instance
+      .registerLazySingleton(() => PaymentRemoteDataSource(instance<Dio>()));
 
-  instance.registerLazySingleton(() => PaymentRepository(instance<PaymentRemoteDataSource>()));
+  instance.registerLazySingleton(
+      () => PaymentRepository(instance<PaymentRemoteDataSource>()));
 }
