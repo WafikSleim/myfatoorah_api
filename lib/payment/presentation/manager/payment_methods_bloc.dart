@@ -53,7 +53,7 @@ class PaymentMethodsBloc extends Bloc<PaymentMethodsEvent, PaymentMethodsState> 
       emit(state.copyWith(
         executeState: States.loading,
       ));
-      final result = await instance<PaymentRepository>().execute(ExecutePaymentRequest(paymentMethodId: event.paymentMethodId, invoiceValue: event.invoiceValue, ));
+      final result = await instance<PaymentRepository>().execute(ExecutePaymentRequest(paymentMethodId: event.paymentMethodId, invoiceValue: event.invoiceValue, errorUrl: event.errorUrl, callBackUrl: event.callBackUrl));
       emit(
         state.copyWith(
           executeState: States.loaded,
