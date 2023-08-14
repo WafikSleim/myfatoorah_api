@@ -5,6 +5,8 @@ class ExecutePaymentRequestModel extends ExecutePaymentRequest {
   const ExecutePaymentRequestModel({
     super.invoiceValue,
     super.paymentMethodId,
+    super.callBackUrl,
+    super.errorUrl,
   });
 
   @override
@@ -13,23 +15,25 @@ class ExecutePaymentRequestModel extends ExecutePaymentRequest {
       (other is ExecutePaymentRequestModel &&
           runtimeType == other.runtimeType &&
           invoiceValue == other.invoiceValue &&
+          callBackUrl == other.callBackUrl &&
+          errorUrl == other.errorUrl &&
           paymentMethodId == other.paymentMethodId);
 
   @override
   int get hashCode => invoiceValue.hashCode ^ paymentMethodId.hashCode;
 
-  @override
-  String toString() {
-    return 'ExecutePaymentRequestModel{ invoiceValue: $invoiceValue, paymentMethodId: $paymentMethodId,}';
-  }
 
   ExecutePaymentRequestModel copyWith({
     double? invoiceValue,
     int? paymentMethodId,
+    String? callBackUrl,
+    String? errorUrl,
   }) {
     return ExecutePaymentRequestModel(
       invoiceValue: invoiceValue ?? this.invoiceValue,
       paymentMethodId: paymentMethodId ?? this.paymentMethodId,
+      callBackUrl: callBackUrl ?? this.callBackUrl,
+      errorUrl: errorUrl ?? this.errorUrl,
     );
   }
 
@@ -37,14 +41,9 @@ class ExecutePaymentRequestModel extends ExecutePaymentRequest {
     return {
       'InvoiceValue': invoiceValue,
       'PaymentMethodId': paymentMethodId,
+      'CallBackUrl' : callBackUrl,
+      'ErrorUrl' : errorUrl,
     };
-  }
-
-  factory ExecutePaymentRequestModel.fromMap(Map<String, dynamic> map) {
-    return ExecutePaymentRequestModel(
-      invoiceValue: map['invoiceValue'] as double,
-      paymentMethodId: map['paymentMethodId'] as int,
-    );
   }
 
 }
