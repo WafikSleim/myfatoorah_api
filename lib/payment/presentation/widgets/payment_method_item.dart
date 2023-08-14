@@ -13,60 +13,64 @@ class PaymentMethodItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      height: 100,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Image.network(
-                paymentMethod.imageUrl ?? "",
-                height: 80,
-                errorBuilder: (_, __, ___) {
-                  return const Icon(
-                    Icons.error,
-                    color: Colors.red,
-                  );
-                },
-              ),
-              Text(
-                paymentMethod.paymentMethodAr ?? paymentMethod.paymentMethodEn ?? "",
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  const Text(
-                    "Amount",
-                  ),
-                  Text(
-                    paymentMethod.totalAmount?.toString() ?? "",
-                  ),
-                ],
-              ),
-              const Spacer(),
-              Row(
-                children: [
-                  const Text(
-                    "service charge"
-                  ),
-                  Text(
-                    paymentMethod.serviceCharge?.toString() ?? "",
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
+    return InkWell(
+      onTap: () {
+        onSelect.call(paymentMethod.paymentMethodId ?? -1);
+      },
+      child: SizedBox(
+        width: double.infinity,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Image.network(
+                  paymentMethod.imageUrl ?? "",
+                  height: 80,
+                  errorBuilder: (_, __, ___) {
+                    return const Icon(
+                      Icons.error,
+                      color: Colors.red,
+                    );
+                  },
+                ),
+                Text(
+                  paymentMethod.paymentMethodAr ?? paymentMethod.paymentMethodEn ?? "",
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    const Text(
+                      "Amount",
+                    ),
+                    Text(
+                      paymentMethod.totalAmount?.toString() ?? "",
+                    ),
+                  ],
+                ),
+                const Spacer(),
+                Row(
+                  children: [
+                    const Text(
+                      "service charge"
+                    ),
+                    Text(
+                      paymentMethod.serviceCharge?.toString() ?? "",
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
