@@ -21,7 +21,7 @@ class MyfatoorahAPIPaymentMethodsScreen extends StatelessWidget {
   final double amount;
   final String currencyCode;
 
-  final void Function(String paymentUrl) onGenerateUrl;
+  final void Function(String? paymentUrl, int? invoiceId, bool isSuccess) onGenerateUrl;
 
   @override
   Widget build(BuildContext context) {

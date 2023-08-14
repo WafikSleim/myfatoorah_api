@@ -5,6 +5,7 @@ import 'package:myfatoorah_api/core/exception/network_exception.dart';
 import 'package:myfatoorah_api/core/services/service_locator.dart';
 import 'package:myfatoorah_api/payment/data/repositories/payment_repository.dart';
 import 'package:myfatoorah_api/payment/domain/entities/currency_iso.dart';
+import 'package:myfatoorah_api/payment/domain/entities/execute_payment_request.dart';
 import 'package:myfatoorah_api/payment/domain/entities/initiate_payment_request.dart';
 import 'package:myfatoorah_api/payment/domain/entities/initiate_payment_response.dart';
 import 'package:myfatoorah_api/payment/domain/use_cases/initiate_payment_use_case.dart';
@@ -48,6 +49,25 @@ class PaymentMethodsBloc extends Bloc<PaymentMethodsEvent, PaymentMethodsState> 
   }
 
   void _executePayment(ExecutePaymentEvent event, Emitter<PaymentMethodsState> emit) async {
-
+    try {
+      emit(state.copyWith(
+        executeState: States.loading,
+      ));
+      final result = await instance<PaymentRepository>().execute(ExecutePaymentRequest(paymentMethodId: event.paymentMethodId, invoiceValue: event.invoiceValue,));
+      emit(
+        state.copyWith(
+          executeState: States.loaded,
+        ),
+      );
+      event.callBack(result.paymentUrl, result.invoiceId, result.isSuccess ?? false);
+    } on PaymentException catch (e) {
+      emit(
+        state.copyWith(
+          error: e.message,
+          executeState: States.error,
+        ),
+      );
+      rethrow;
+    }
   }
 }
