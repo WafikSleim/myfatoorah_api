@@ -50,7 +50,7 @@ class ExecutePaymentResponseModel extends ExecutePaymentResponse {
     return ExecutePaymentResponseModel(
       invoiceId: map["Data"]['InvoiceId'] as int,
       paymentUrl: map["Data"]['PaymentURL'] as String,
-      isSuccess: map['isSuccess'] as bool,
+      isSuccess: map['isSuccess'] as bool?,
     );
   }
 
