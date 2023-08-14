@@ -14,7 +14,7 @@ class PaymentRepository extends BasePaymentRepository {
 
   @override
   Future<ExecutePaymentResponse> execute(ExecutePaymentRequest request) async {
-    return await paymentRemoteDataSource.execute(ExecutePaymentRequestModel(invoiceValue: request.invoiceValue, paymentMethodId: request.paymentMethodId,));
+    return await paymentRemoteDataSource.execute(ExecutePaymentRequestModel(invoiceValue: request.invoiceValue, paymentMethodId: request.paymentMethodId, callBackUrl: request.callBackUrl, errorUrl: request.errorUrl,));
   }
 
   @override
