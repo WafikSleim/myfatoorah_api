@@ -20,11 +20,16 @@ class ExecutePaymentEvent extends PaymentMethodsEvent {
 
   final double invoiceValue;
 
+  final String? callBackUrl;
+  final String? errorUrl;
+
   final void Function(String? paymentUrl, int? invoiceId, bool success) callBack;
 
   const ExecutePaymentEvent({
     required this.paymentMethodId,
     required this.invoiceValue,
     required this.callBack,
+    this.errorUrl,
+    this.callBackUrl,
   });
 }

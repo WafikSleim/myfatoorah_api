@@ -10,11 +10,13 @@ class MyfatoorahAPIPaymentMethodsScreen extends StatelessWidget {
     this.title,
     required this.amount,
     required this.currencyCode,
-    required this.onGenerateUrl, this.leadingColor,
+    required this.onGenerateUrl, this.leadingColor, required this.callBackUrl, required this.errorUrl,
   });
 
   final Color? appBarBackgroundColor;
   final Color? leadingColor;
+  final String callBackUrl;
+  final String errorUrl;
 
   final Widget? title;
 
@@ -55,7 +57,7 @@ class MyfatoorahAPIPaymentMethodsScreen extends StatelessWidget {
                           (e) => PaymentMethodItemWidget(
                             paymentMethod: e,
                             onSelect: (id) {
-                              PaymentMethodsBloc.get(context).add(ExecutePaymentEvent(paymentMethodId: id, invoiceValue: amount, callBack: onGenerateUrl),);
+                              PaymentMethodsBloc.get(context).add(ExecutePaymentEvent(paymentMethodId: id, invoiceValue: amount, callBack: onGenerateUrl,  errorUrl: errorUrl, callBackUrl: callBackUrl,),);
                             },
                           ),
                         )
