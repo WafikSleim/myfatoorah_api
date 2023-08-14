@@ -16,21 +16,41 @@ class PaymentMethodItemWidget extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       height: 100,
-      child: Row(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(
-            child: Image.network(
-              paymentMethod.imageUrl ?? "",
-              errorBuilder: (_, __, ___) {
-                return const Icon(
-                  Icons.error,
-                  color: Colors.red,
-                );
-              },
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Image.network(
+                  paymentMethod.imageUrl ?? "",
+                  errorBuilder: (_, __, ___) {
+                    return const Icon(
+                      Icons.error,
+                      color: Colors.red,
+                    );
+                  },
+                ),
+              ),
+              Text(
+                paymentMethod.paymentMethodAr ?? "",
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+            ],
           ),
-          Text(
-            paymentMethod.paymentMethodAr ?? "",
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                paymentMethod.totalAmount?.toString() ?? "",
+              ),
+              Text(
+                paymentMethod.serviceCharge?.toString() ?? "",
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+            ],
           ),
         ],
       ),

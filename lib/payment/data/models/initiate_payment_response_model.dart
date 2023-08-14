@@ -41,7 +41,7 @@ class InitiatePaymentResponseModel extends InitiatePaymentResponse {
   factory InitiatePaymentResponseModel.fromMap(Map<String, dynamic> map) {
     final data = map["Data"];
     return InitiatePaymentResponseModel(
-      paymentMethods: (data["PaymentMethods"] as List<dynamic>).map((e) => PaymentMethodModel.fromMap(e)).toList(),
+      paymentMethods: (data?["PaymentMethods"] as List<dynamic>?)?.map((e) => PaymentMethodModel.fromMap(e)).toList(),
     );
   }
 
@@ -129,17 +129,17 @@ class PaymentMethodModel extends PaymentMethod {
 
   factory PaymentMethodModel.fromMap(Map<String, dynamic> map) {
     return PaymentMethodModel(
-      paymentMethodId: map['paymentMethodId'] as int?,
-      paymentMethodAr: map['paymentMethodAr'] as String?,
-      paymentMethodEn: map['paymentMethodEn'] as String?,
-      paymentMethodCode: map['paymentMethodCode'] as String?,
-      isDirectPayment: map['isDirectPayment'] as bool?,
-      serviceCharge: map['serviceCharge'] as double?,
-      totalAmount: map['totalAmount'] as double?,
-      currencyIso: map['currencyIso'] as String?,
-      imageUrl: map['imageUrl'] as String?,
-      isEmbeddedSupported: map['isEmbeddedSupported'] as bool?,
-      paymentCurrencyIso: map['paymentCurrencyIso'] as String?,
+      paymentMethodId: map['PaymentMethodId'] as int?,
+      paymentMethodAr: map['PaymentMethodAr'] as String?,
+      paymentMethodEn: map['PaymentMethodEn'] as String?,
+      paymentMethodCode: map['PaymentMethodCode'] as String?,
+      isDirectPayment: map['IsDirectPayment'] as bool?,
+      serviceCharge: map['ServiceCharge'] as double?,
+      totalAmount: map['TotalAmount'] as double?,
+      currencyIso: map['CurrencyIso'] as String?,
+      imageUrl: map['ImageUrl'] as String?,
+      isEmbeddedSupported: map['IsEmbeddedSupported'] as bool?,
+      paymentCurrencyIso: map['PaymentCurrencyIso'] as String?,
     );
   }
 

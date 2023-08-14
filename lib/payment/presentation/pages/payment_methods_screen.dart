@@ -10,10 +10,12 @@ class MyfatoorahAPIPaymentMethodsScreen extends StatelessWidget {
     this.title,
     required this.amount,
     required this.currencyCode,
-    required this.onGenerateUrl,
+    required this.onGenerateUrl, this.leadingColor,
   });
 
   final Color? appBarBackgroundColor;
+  final Color? leadingColor;
+
   final Widget? title;
 
   final double amount;
@@ -42,6 +44,9 @@ class MyfatoorahAPIPaymentMethodsScreen extends StatelessWidget {
                     "Myfatoorah",
                   ),
               centerTitle: true,
+              iconTheme: Theme.of(context).appBarTheme.iconTheme!.copyWith(
+                color: leadingColor,
+              ),
             ),
             body: state.initState == States.loaded
                 ? ListView(
