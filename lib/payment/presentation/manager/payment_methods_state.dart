@@ -17,9 +17,14 @@ class PaymentMethodsState {
 
   const PaymentMethodsState({
     this.error,
-    this.initState = States.init,
+    this.initState = States.loaded,
     this.executeState = States.init,
-    this.paymentMethods = const [],
+    this.paymentMethods = const [
+      PaymentMethod(paymentMethodId: 6, paymentMethodAr: "مدي", paymentMethodEn: "Mada"),
+      PaymentMethod(paymentMethodId: 11, paymentMethodAr: "ابل باي", paymentMethodEn: "Apple pay"),
+      PaymentMethod(paymentMethodId: 2, paymentMethodAr: "فيزا/ماستر", paymentMethodEn: "Visa/Master"),
+      PaymentMethod(paymentMethodId: 14, paymentMethodAr: "اس تي سي باي", paymentMethodEn: "STC pay"),
+    ],
   });
 
   PaymentMethodsState copyWith({

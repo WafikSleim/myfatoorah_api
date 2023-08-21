@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:myfatoorah_api/payment/domain/entities/initiate_payment_response.dart';
 
 class PaymentMethodItemWidget extends StatelessWidget {
@@ -17,59 +18,28 @@ class PaymentMethodItemWidget extends StatelessWidget {
       onTap: () {
         onSelect.call(paymentMethod.paymentMethodId ?? -1);
       },
-      child: SizedBox(
+      child: Container(
         width: double.infinity,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Image.network(
-                  paymentMethod.imageUrl ?? "",
-                  height: 80,
-                  errorBuilder: (_, __, ___) {
-                    return const Icon(
-                      Icons.error,
-                      color: Colors.red,
-                    );
-                  },
-                ),
-                Text(
-                  paymentMethod.paymentMethodAr ?? paymentMethod.paymentMethodEn ?? "",
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    const Text(
-                      "Amount",
-                    ),
-                    Text(
-                      paymentMethod.totalAmount?.toString() ?? "",
-                    ),
-                  ],
-                ),
-                const Spacer(),
-                Row(
-                  children: [
-                    const Text(
-                      "service charge"
-                    ),
-                    Text(
-                      paymentMethod.serviceCharge?.toString() ?? "",
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ],
+        margin: const EdgeInsets.symmetric(
+          vertical: 10,
+          horizontal: 20,
+        ),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(
+              color: Colors.black,
+              width: 1
+          ),
+        ),
+        padding: const EdgeInsets.all(
+          15,
+        ),
+        alignment: AlignmentDirectional.center,
+        child: SvgPicture.asset(
+          "assets/icons/payment/${paymentMethod.paymentMethodId}.svg",
+          width: 60,
+          height: 40,
+          fit: BoxFit.cover,
         ),
       ),
     );

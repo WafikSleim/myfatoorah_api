@@ -10,7 +10,11 @@ class MyfatoorahAPIPaymentMethodsScreen extends StatelessWidget {
     this.title,
     required this.amount,
     required this.currencyCode,
-    required this.onGenerateUrl, this.leadingColor, required this.callBackUrl, required this.errorUrl,
+    required this.onGenerateUrl,
+    this.leadingColor,
+    required this.callBackUrl,
+    required this.errorUrl,
+    this.isArabic = true,
   });
 
   final Color? appBarBackgroundColor;
@@ -23,18 +27,18 @@ class MyfatoorahAPIPaymentMethodsScreen extends StatelessWidget {
   final double amount;
   final String currencyCode;
 
-  final void Function(String? paymentUrl, int? invoiceId, bool isSuccess) onGenerateUrl;
+  final bool isArabic;
+
+  final void Function(
+    String? paymentUrl,
+    int? invoiceId,
+    bool isSuccess,
+  ) onGenerateUrl;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => PaymentMethodsBloc()
-        ..add(
-          InitPaymentEvent(
-            amount: amount,
-            currencyCode: currencyCode,
-          ),
-        ),
+      create: (context) => PaymentMethodsBloc(),
       child: BlocConsumer<PaymentMethodsBloc, PaymentMethodsState>(
         listener: (context, state) {},
         builder: (context, state) {
@@ -47,8 +51,8 @@ class MyfatoorahAPIPaymentMethodsScreen extends StatelessWidget {
                   ),
               centerTitle: true,
               iconTheme: Theme.of(context).appBarTheme.iconTheme!.copyWith(
-                color: leadingColor,
-              ),
+                    color: leadingColor,
+                  ),
             ),
             body: state.initState == States.loaded
                 ? ListView(
@@ -57,11 +61,18 @@ class MyfatoorahAPIPaymentMethodsScreen extends StatelessWidget {
                           (e) => PaymentMethodItemWidget(
                             paymentMethod: e,
                             onSelect: (id) {
-                              PaymentMethodsBloc.get(context).add(ExecutePaymentEvent(paymentMethodId: id, invoiceValue: amount, callBack: onGenerateUrl,  errorUrl: errorUrl, callBackUrl: callBackUrl,),);
+                              PaymentMethodsBloc.get(context).add(
+                                ExecutePaymentEvent(
+                                  paymentMethodId: id,
+                                  invoiceValue: amount,
+                                  callBack: onGenerateUrl,
+                                  errorUrl: errorUrl,
+                                  callBackUrl: callBackUrl,
+                                ),
+                              );
                             },
                           ),
-                        )
-                        .toList(),
+                        ).toList(),
                   )
                 : state.initState == States.loading
                     ? const Center(
